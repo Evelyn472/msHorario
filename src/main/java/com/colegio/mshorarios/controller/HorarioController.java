@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/horarios")
+@RequestMapping("/api/v1/horario")
 @RequiredArgsConstructor
 public class HorarioController {
 
