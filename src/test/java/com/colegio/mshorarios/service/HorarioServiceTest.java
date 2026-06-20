@@ -42,7 +42,6 @@ class HorarioServiceTest {
     @Test
     void guardarHorarioCorrectamente() {
 
-        // GIVEN
         HorarioRequestDTO dto = new HorarioRequestDTO(
                 "LUNES",
                 "08:00-09:30",
@@ -69,14 +68,51 @@ class HorarioServiceTest {
         when(horarioRepository.save(any(Horario.class)))
                 .thenReturn(horarioGuardado);
 
-        // WHEN
+        
         HorarioResponseDTO resultado = horarioService.guardar(dto);
 
-        // THEN
         assertNotNull(resultado);
         assertEquals(1L, resultado.getId());
 
         verify(horarioRepository, times(1))
                 .save(any(Horario.class));
     }
+
+        @Test
+        void obtenerHorarioPorId() {
+
+        Horario horario = new Horario(
+            1L,
+            "LUNES",
+            "08:00 - 09:30",
+            "Sala 101",
+            1L,
+            1L,
+            1L
+        );
+
+        when(horarioRepository.findById(1L))
+            .thenReturn(Optional.of(horario));
+
+        Optional<HorarioResponseDTO> resultado =
+            horarioService.obtenerPorId(1L);
+
+        assertTrue(resultado.isPresent());
+        assertEquals(1L, resultado.get().getId());
+
+        verify(horarioRepository, times(1))
+            .findById(1L);
+        }
+
+        @Test
+        void eliminarHorario() {
+
+        doNothing().when(horarioRepository)
+            .deleteById(1L);
+
+        horarioService.eliminar(1L);
+
+        verify(horarioRepository, times(1))
+            .deleteById(1L);
+        }
 }
