@@ -5,12 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// ═══════════════════════════════════════════════════
-// IMPORTANTE: No hay @ManyToOne hacia Curso, Profesor o Asignatura.
-// La relación es LÓGICA, no referenciada por FK en BD.
-// Cada microservicio tiene su propia BD aislada.
-// La integridad se garantiza por código (llamada HTTP).
-// ═══════════════════════════════════════════════════
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
